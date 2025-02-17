@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Spirit Dog Breed</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🐶 What's Your Spirit Dog Breed? 🐶</h1>
+
+        <div class="quiz">
+            <p>What's your energy level?</p>
+            <select id="energy">
+                <option value="low">Chill & Relaxed</option>
+                <option value="medium">Balanced & Playful</option>
+                <option value="high">Energetic & Adventurous</option>
+            </select>
+
+            <p>Do you prefer solo time or socializing?</p>
+            <select id="social">
+                <option value="solo">Solo Explorer</option>
+                <option value="balanced">Both Are Great</option>
+                <option value="social">Life of the Party</option>
+            </select>
+
+            <p>Pick a word that describes you:</p>
+            <select id="personality">
+                <option value="loyal">Loyal</option>
+                <option value="curious">Curious</option>
+                <option value="brave">Brave</option>
+                <option value="funny">Goofy</option>
+            </select>
+        </div>
+
+        <button id="findDogBtn">Find My Spirit Dog 🐕</button>
+
+        <div id="result">
+            <p id="status"></p>
+            <img id="dogImage" src="" alt="">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
