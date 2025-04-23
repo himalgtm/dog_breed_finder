@@ -3,45 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Spirit Dog Breed</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dog Breed Finder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="paw.ico">
 </head>
 <body>
-    <div class="container">
-        <h1>🐶 What's Your Spirit Dog Breed? 🐶</h1>
-
-        <div class="quiz">
-            <p>What's your energy level?</p>
-            <select id="energy">
-                <option value="low">Chill & Relaxed</option>
-                <option value="medium">Balanced & Playful</option>
-                <option value="high">Energetic & Adventurous</option>
-            </select>
-
-            <p>Do you prefer solo time or socializing?</p>
-            <select id="social">
-                <option value="solo">Solo Explorer</option>
-                <option value="balanced">Both Are Great</option>
-                <option value="social">Life of the Party</option>
-            </select>
-
-            <p>Pick a word that describes you:</p>
-            <select id="personality">
-                <option value="loyal">Loyal</option>
-                <option value="curious">Curious</option>
-                <option value="brave">Brave</option>
-                <option value="funny">Goofy</option>
-            </select>
-        </div>
-
-        <button id="findDogBtn">Find My Spirit Dog 🐕</button>
-
-        <div id="result">
-            <p id="status"></p>
-            <img id="dogImage" src="" alt="">
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+    <h1>Dog Breed Finder</h1>
+    <h2>Let's find your favourite breed! Paw-rty Time!</h2>
+    <input type="text" id="breedInput" list="breeds" placeholder="Enter dog breed">
+    <datalist id="breeds"></datalist>
+    <button id="showImages">Show Images</button>
+    <p id="message"></p>
+    <div id="imageContainer"></div>
+    <footer>
+        <p>Created by Pranish Uprety 🐾</p>
+    </footer>    
 </body>
+<script src="script.js"></script>
 </html>
