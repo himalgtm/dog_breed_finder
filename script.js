@@ -1,57 +1,45 @@
-const findDogBtn = document.getElementById('findDogBtn');
-const dogImage = document.getElementById('dogImage');
-const statusText = document.getElementById('status');
+const breedInput = document.getElementById('breedInput');
+const breedList = document.getElementById('breeds');
+const message = document.getElementById('message');
+const imageContainer = document.getElementById('imageContainer');
+const showImagesButton = document.getElementById('showImages');
+let intervalId;
 
-let imageInterval;
-
-const breedMapping = {
-    low: {
-        solo: ["bulldog", "chow", "shih-tzu"],
-        balanced: ["basset", "cavalier", "pug"],
-        social: ["cavalier", "maltese", "pekingese"]
-    },
-    medium: {
-        solo: ["shiba", "basenji", "whippet"],
-        balanced: ["golden", "samoyed", "beagle"],
-        social: ["border-collie", "cocker-spaniel", "dalmatian"]
-    },
-    high: {
-        solo: ["malinois", "akita", "australian-shepherd"],
-        balanced: ["labrador", "german-shepherd", "doberman"],
-        social: ["husky", "jack-russell", "boxer"]
+async function fetchBreeds() {
+    try {
+        const response = await fetch('https://dog.ceo/api/breeds/list/all');
+        const data = await response.json();
+        const breeds = Object.keys(data.message);
+        breedList.innerHTML = breeds.map(breed => `<option value="${breed}">`).join('');
+    } catch (error) {
+        console.error('Error fetching breeds:', error);
     }
-};
-
-function fetchDogImage(breed) {
-    clearInterval(imageInterval);
-    
-    fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "success") {
-                dogImage.src = data.message;
-                dogImage.style.display = 'block';
-                statusText.innerText = `Your Spirit Dog is a ${breed.replace("-", " ").toUpperCase()}! 🐶`;
-
-                imageInterval = setInterval(() => {
-                    fetchDogImage(breed);
-                }, 5000);
-            } else {
-                statusText.innerText = "Oops! No matching breed found.";
-                dogImage.style.display = 'none';
-            }
-        })
-        .catch(() => {
-            statusText.innerText = "Error fetching dog images.";
-        });
 }
 
-findDogBtn.addEventListener('click', () => {
-    const energy = document.getElementById('energy').value;
-    const social = document.getElementById('social').value;
+async function fetchDogImages() {
+    clearInterval(intervalId);
+    const breed = breedInput.value.toLowerCase();
+    imageContainer.innerHTML = '';
+    message.textContent = '';
 
-    const breedList = breedMapping[energy][social];
-    const randomBreed = breedList[Math.floor(Math.random() * breedList.length)];
+    if (!breedList.innerHTML.includes(`value="${breed}"`)) {
+        message.textContent = 'Oopsie!!! No such breed!';
+        return;
+    }
 
-    fetchDogImage(randomBreed);
-});
+    async function loadImage() {
+        try {
+            const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
+            const data = await response.json();
+            imageContainer.innerHTML = `<img src="${data.message}" alt="${breed}">`;
+        } catch (error) {
+            console.error('Sorry! Error fetching dog images:', error);
+        }
+    }
+
+    loadImage();
+    intervalId = setInterval(loadImage, 5000);
+}
+
+showImagesButton.addEventListener('click', fetchDogImages);
+fetchBreeds();
