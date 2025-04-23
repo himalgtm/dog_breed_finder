@@ -1,83 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
 
 body {
-    font-family: 'Great Vibes', cursive;
-    text-align: center;
-    background-color: #f8f9fa;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    font-size: 1.5em;;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  background-color: #fffdf6;
+  margin: 0;
+  padding: 1em;
+  min-height: 100vh;
+  background-image: url('https://www.transparenttextures.com/patterns/paw-print.png');
+  background-repeat: repeat;
+  background-size: 60px;
+  animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  from { background-position: 0 0; }
+  to { background-position: 100% 100%; }
 }
 
 h1 {
-    font-family: 'Fredoka One', cursive;
-    background-color: #ff914d;
-    font-size: 2.8em;
-    color: white;
-    margin-top: 0px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
+  font-family: 'Fredoka One', cursive;
+  font-size: 3em;
+  margin: 0.2em 0;
+  color: #ff6b35;
 }
 
 h2 {
-    font-size: 1.8em;
-    color: #555;
-    margin-bottom: 15px;
+  font-size: 1.5em;
+  color: #444;
+  margin-bottom: 1em;
+}
+
+input, button {
+  font-size: 1em;
+  padding: 0.75em 1em;
+  margin: 0.5em;
+  border-radius: 8px;
+  border: none;
+  outline: none;
 }
 
 input {
-    width: 250px;
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid #ff914d;
-    border-radius: 5px;
-    margin: 10px 0;
-    font-family: 'Fredoka One', cursive;
+  border: 2px solid #ff914d;
+  width: 250px;
+  font-family: 'Fredoka One', cursive;
 }
 
 button {
-    background-color: #ff914d;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    font-family: 'Fredoka One', cursive;
+  background-color: #ff914d;
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: #d4692d;
+  transform: scale(1.05);
+  background-color: #d25c1c;
 }
 
 #message {
-    font-size: 1.2em;
-    color: red;
-    margin-top: 10px;
+  margin: 0.5em;
+  font-weight: bold;
+  color: red;
+}
+
+#imageContainer {
+  margin-top: 1em;
+}
+
+img {
+  max-width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #ff914d;
-    color: white;
-    text-align: center;
-    padding: 0.01px 0;
-    font-size: 0.9em;
-}
-
-
-img {
-    max-width: 400px;
-    max-height: 4%;
-    width: auto;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
+  margin-top: 2em;
+  font-size: 0.85em;
+  color: #666;
 }
