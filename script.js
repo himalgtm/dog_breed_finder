@@ -3,42 +3,48 @@ const breedList = document.getElementById('breeds');
 const message = document.getElementById('message');
 const imageContainer = document.getElementById('imageContainer');
 const showImagesButton = document.getElementById('showImages');
-let intervalId;
+let intervalId = null;
+let allBreeds = [];
 
 async function fetchBreeds() {
-    try {
-        const response = await fetch('https://dog.ceo/api/breeds/list/all');
-        const data = await response.json();
-        const breeds = Object.keys(data.message);
-        breedList.innerHTML = breeds.map(breed => `<option value="${breed}">`).join('');
-    } catch (error) {
-        console.error('Error fetching breeds:', error);
-    }
+  try {
+    const res = await fetch('https://dog.ceo/api/breeds/list/all');
+    const data = await res.json();
+    allBreeds = Object.keys(data.message);
+    breedList.innerHTML = allBreeds.map(b => `<option value="${b}">`).join('');
+  } catch (err) {
+    message.textContent = 'Error loading breed list.';
+  }
 }
 
 async function fetchDogImages() {
-    clearInterval(intervalId);
-    const breed = breedInput.value.toLowerCase();
-    imageContainer.innerHTML = '';
-    message.textContent = '';
+  clearInterval(intervalId);
+  const breed = breedInput.value.toLowerCase().trim();
+  imageContainer.innerHTML = '';
+  message.textContent = '';
 
-    if (!breedList.innerHTML.includes(`value="${breed}"`)) {
-        message.textContent = 'Oopsie!!! No such breed!';
-        return;
+  if (!allBreeds.includes(breed)) {
+    message.textContent = 'Oopsie!!! No such breed!';
+    return;
+  }
+
+  const loader = document.createElement('p');
+  loader.textContent = 'Loading...';
+  imageContainer.appendChild(loader);
+
+  async function loadImage() {
+    try {
+      const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
+      const data = await response.json();
+      imageContainer.innerHTML = `<img src="${data.message}" alt="${breed}">`;
+    } catch {
+      imageContainer.innerHTML = '';
+      message.textContent = 'Failed to load image!';
     }
+  }
 
-    async function loadImage() {
-        try {
-            const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
-            const data = await response.json();
-            imageContainer.innerHTML = `<img src="${data.message}" alt="${breed}">`;
-        } catch (error) {
-            console.error('Sorry! Error fetching dog images:', error);
-        }
-    }
-
-    loadImage();
-    intervalId = setInterval(loadImage, 5000);
+  await loadImage();
+  intervalId = setInterval(loadImage, 5000);
 }
 
 showImagesButton.addEventListener('click', fetchDogImages);
